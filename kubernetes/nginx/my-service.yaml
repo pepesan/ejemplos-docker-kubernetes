@@ -1,0 +1,41 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "my-service",
+    "namespace": "default",
+    "selfLink": "/api/v1/namespaces/default/services/my-service",
+    "uid": "d1205a73-d38b-11e8-b44a-025000000001",
+    "resourceVersion": "9355",
+    "creationTimestamp": "2018-10-19T10:43:29Z",
+    "labels": {
+      "run": "hello-nginx"
+    }
+  },
+  "spec": {
+    "ports": [
+      {
+        "protocol": "TCP",
+        "port": 80,
+        "targetPort": 80,
+        "nodePort": 31253
+      }
+    ],
+    "selector": {
+      "run": "hello-nginx"
+    },
+    "clusterIP": "10.110.23.60",
+    "type": "LoadBalancer",
+    "sessionAffinity": "None",
+    "externalTrafficPolicy": "Cluster"
+  },
+  "status": {
+    "loadBalancer": {
+      "ingress": [
+        {
+          "hostname": "localhost"
+        }
+      ]
+    }
+  }
+}

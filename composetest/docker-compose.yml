@@ -1,0 +1,24 @@
+version: '3'
+services:
+  web:
+    deploy:
+      replicas: 5
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    image: pepesan/app-python:latest
+    ports:
+     - "4000:5000"
+    #volumes:
+    # - .:/code
+    networks:
+      - webnet
+  redis:
+    image: "redis:alpine"
+    networks:
+      - webnet
+networks:
+  webnet:

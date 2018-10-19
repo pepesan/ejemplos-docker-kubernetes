@@ -1,0 +1,41 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "hello-nginx",
+    "namespace": "default",
+    "selfLink": "/api/v1/namespaces/default/services/hello-nginx",
+    "uid": "d695eaa1-d38a-11e8-b44a-025000000001",
+    "resourceVersion": "8850",
+    "creationTimestamp": "2018-10-19T10:36:29Z",
+    "labels": {
+      "run": "hello-nginx"
+    }
+  },
+  "spec": {
+    "ports": [
+      {
+        "protocol": "TCP",
+        "port": 80,
+        "targetPort": 80,
+        "nodePort": 32293
+      }
+    ],
+    "selector": {
+      "run": "hello-nginx"
+    },
+    "clusterIP": "10.100.208.67",
+    "type": "NodePort",
+    "sessionAffinity": "None",
+    "externalTrafficPolicy": "Cluster"
+  },
+  "status": {
+    "loadBalancer": {
+      "ingress": [
+        {
+          "hostname": "localhost"
+        }
+      ]
+    }
+  }
+}
