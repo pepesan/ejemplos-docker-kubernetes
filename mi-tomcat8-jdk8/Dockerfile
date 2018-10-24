@@ -20,7 +20,7 @@ RUN cd /tmp && tar xvfz tomcat.tar.gz
 
 WORKDIR $CATALINA_HOME
 
-RUN cp -Rv /tmp/apache-tomcat-${TOMCAT_VERSION}/* /usr/local/tomcat/
+RUN cp -Rv /tmp/apache-tomcat-${TOMCAT_VERSION}/* $CATALINA_HOME
 
 
 EXPOSE 8080
@@ -34,4 +34,4 @@ VOLUME ${CATALINA_HOME}/logs
 VOLUME ${CATALINA_HOME}/webapps
 
 
-CMD /usr/local/tomcat/bin/catalina.sh run
+CMD ./bin/catalina.sh run
