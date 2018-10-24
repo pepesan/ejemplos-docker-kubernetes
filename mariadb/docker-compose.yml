@@ -1,0 +1,15 @@
+version: "3"
+services:
+  web:
+    image: mariadb:10.3.10-bionic
+    container_name: mariadb-bionic
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./volumes/data:/var/lib/mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: development
+    networks:
+      - webnet
+networks:
+  webnet:
