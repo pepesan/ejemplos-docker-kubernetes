@@ -1,19 +1,21 @@
-FROM pepesan/mi-ubuntu-jdk8:latest
+FROM pepesan/mi-ubuntu-jdk11:11.0.7
 
 
-ENV TOMCAT_VERSION 8.5.34
+ENV TOMCAT_VERSION 8.5.57
 
 ENV CATALINA_HOME="/usr/local/tomcat"
 
-ENV JAVA_HOME="/usr/lib/jvm/java-8-oracle"
+ENV JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
 
-ENV JRE_HOME="/usr/lib/jvm/java-8-oracle/jre"
+ENV JRE_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
 
 RUN apt-get update
 
 RUN apt-get -y upgrade
 
 RUN apt-get -y install wget
+
+RUN apt-get -y autoclean
 
 RUN wget http://apache.uvigo.es/tomcat/tomcat-8/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz -O /tmp/tomcat.tar.gz
 RUN cd /tmp && tar xvfz tomcat.tar.gz
