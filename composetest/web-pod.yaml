@@ -3,6 +3,7 @@ kind: Pod
 metadata:
   creationTimestamp: null
   labels:
+    io.kompose.network/webnet: "true"
     io.kompose.service: web
   name: web
 spec:

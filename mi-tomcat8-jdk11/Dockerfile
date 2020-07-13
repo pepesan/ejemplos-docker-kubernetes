@@ -9,13 +9,13 @@ ENV JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
 
 ENV JRE_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
 
-RUN apt-get update
+RUN apt update
 
-RUN apt-get -y upgrade
+RUN apt -y upgrade
 
-RUN apt-get -y install wget
+RUN apt -y install wget
 
-RUN apt-get -y autoclean
+RUN apt -y autoclean
 
 RUN wget http://apache.uvigo.es/tomcat/tomcat-8/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz -O /tmp/tomcat.tar.gz
 RUN cd /tmp && tar xvfz tomcat.tar.gz
