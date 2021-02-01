@@ -6,6 +6,6 @@
 * ./create_image_with_variables.sh
 * ./start_with_variables.sh
 # parada de servicio
-* stop_with_variables.sh
+* ./stop_with_variables.sh
 # Limpieza de sistema
-* clean_with_variables.sh
+* ./clean_with_variables.sh
