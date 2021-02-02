@@ -21,6 +21,7 @@ services:
     networks:
       - "app-network"
 
+
   #MySQL Service
   mariadb:
     image: "mariadb:$MARIADB_TAG"
