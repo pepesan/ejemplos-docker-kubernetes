@@ -1,23 +1,54 @@
 version: '3.8'
 services:
+  #PHP Service
+  app:
+    image: "php:7.4.14-fpm-buster"
+    container_name: "app-$ENV_STAGE"
+    restart: always
+    depends_on:
+      - "mariadb"
+      #  - "redis"
+      #- "matomo-app"
+    tty: true
+    user: "${DUID}:${DGID}"
+    environment:
+      SERVICE_NAME: "app-$ENV_STAGE"
+      SERVICE_TAGS: dev
+      # PHP_EXTENSION_XDEBUG: 1
+      #PHP_INI_XDEBUG__REMOTE_PORT: 10000
+      #PHP_IDE_CONFIG: "server_name=localhost"
+      #XDEBUG_CONFIG: "remote_port=10000 remote_autostart=1"
+    working_dir: /var/www
+    #ports:
+    #  - "$PHP_FPM_PORT:9000"
+    volumes:
+      #- "./config/etc/group:/etc/group"
+      - "./src:/var/www:rw"
+      #- "./drupal_etc/settings-$ENV_STAGE.php:/var/www/web/sites/default/settings.php"
+      - "./config/php-app/local-$ENV_STAGE.ini:/usr/local/etc/php/conf.d/local.ini"
+      #- "./config/php-app/local-fpm-$ENV_STAGE.ini:/usr/local/etc/php-fpm.d/docker-fpm.conf"
+      #- "./volumes-$ENV_STAGE/app-tmp:/tmp"
+    networks:
+      - "app-network"
+
   webserver:
     image: "nginx:1.19.2-alpine"
     container_name: "webserver-$ENV_STAGE"
     restart: unless-stopped
     depends_on:
-      #- "app"
+      - "app"
       - "mariadb"
     tty: true
     ports:
       - "$NGINX_HTTP_PORT:80"
       - "$NGINX_HTTPS_PORT:443"
-    #user: "${UID}:${GID}"
+    user: "${UID}:${GID}"
     volumes:
-      - ./src:/usr/share/nginx/html
+      - ./src:/var/www/html
       #- "./config/etc/group:/etc/group"
-      #- "./config/nginx/app-$ENV_STAGE.conf:/etc/nginx/conf.d/default.conf"
-      #- "./config/nginx/nginx.conf:/etc/nginx/nginx.conf"
-      #- "./volumes-$ENV_STAGE/logs:/var/log/nginx"
+      - "./config/nginx/app-$ENV_STAGE.conf:/etc/nginx/conf.d/default.conf"
+      - "./config/nginx/nginx.conf:/etc/nginx/nginx.conf"
+      - "./volumes-$ENV_STAGE/app-logs:/var/log/nginx"
     networks:
       - "app-network"
 
